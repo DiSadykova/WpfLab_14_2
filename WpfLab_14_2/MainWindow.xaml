@@ -5,10 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfLab_14_2"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" x:Name="this">
+        Title="MainWindow" Height="900" Width="800">
     <Window.Resources>
+        <local:CategoryConverter x:Key="converter"/>
+        <local:BackgroundConverter x:Key="converterBackground"/>
         <DataTemplate x:Key="myTemplate">
-            <Border BorderBrush="DarkBlue" BorderThickness="1" Padding="5" Margin="5">
+            <Border  x:Name="border" BorderBrush="DarkBlue" BorderThickness="1" Padding="5" Margin="5">
+                <Border.Background>
+                    <ImageBrush Opacity="0.15" ImageSource="{Binding Path=Category, Converter={StaticResource converterBackground}}" Stretch="UniformToFill"/>
+                </Border.Background>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -18,18 +23,31 @@
                     <Grid.RowDefinitions>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Grid.Column="0" Text
-                    <TextBlock Text="{Binding Path=Name}"/>
-                    <TextBlock Text="{Binding Path=Price}"/>
-                    <TextBlock Text="{Binding Path=Category}"/>
+                    <TextBlock Grid.Row="0" Grid.Column="0" Text="Категория:"/>
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Path=Category, Converter={StaticResource converter}}"/>
+                    <TextBlock Grid.Row="1" Grid.Column="0" Text="Название:"/>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Path=Name}"/>
+                    <TextBlock Grid.Row="2" Grid.Column="0" Text="Цена:"/>
+                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Price}"/>
+                    <Image Width="50" Height="80" Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Source="{Binding Path=ImageSource}"/>
+
                 </Grid>
             </Border>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Path=Category}">
+                    <DataTrigger.Value>
+                        <local:Categories>Food</local:Categories>
+                    </DataTrigger.Value>
+                    <Setter TargetName="border" Property="BorderBrush" Value="Magenta" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
         </DataTemplate>
     </Window.Resources>
     <StackPanel>
-        <TextBlock Name="ProductsTitle" FontSize="20" Text="Список продуктов:"/>
-        <ListBox Name="lstBox" Width="400" Margin="10" ItemTemplate="{StaticResource myTemplate}"/>
-
+        <TextBlock Name="ProductsTitle" FontSize="20" Text="Список продуктов:" HorizontalAlignment="Center"/>
+        <ListBox Name="lstBox" Width="400" Margin="10" ItemTemplate="{StaticResource myTemplate}" HorizontalContentAlignment="Stretch" />
+        <Button Content="Добавить" Click="Button_Click"/>
     </StackPanel>
 </Window>

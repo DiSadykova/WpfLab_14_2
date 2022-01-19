@@ -15,7 +15,7 @@ namespace WpfLab_14_2
     {
         public string Name { get; set; }
         public double Price { get; set; }
-        public string ImageSourse { get; set; }
+        public string ImageSource { get; set; }
         public Categories Category { get; set; }
 
         public override string ToString()

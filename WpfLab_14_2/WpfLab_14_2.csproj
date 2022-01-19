@@ -63,6 +63,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BackgroundConverter.cs" />
+    <Compile Include="CategoryConverter.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -95,10 +97,18 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Data\blender.jpg" />
+    <Resource Include="Data\chaynik.jpg" />
+    <Resource Include="Data\hleb.jpg" />
+    <Resource Include="Data\myaso.jpg" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Data\bitovayatehnika.jpg" />
     <Resource Include="Data\eda.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Data\yabloki.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
